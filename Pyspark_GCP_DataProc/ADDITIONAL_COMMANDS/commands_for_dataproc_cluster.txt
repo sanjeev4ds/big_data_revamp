@@ -1,0 +1,29 @@
+creating dataproc cluster-
+
+gcloud dataproc clusters create cluster-95c1 \
+--enable-component-gateway \
+--region us-central1 \
+--no-address \
+--master-machine-type n1-standard-2 \
+--master-boot-disk-size 50 \
+--num-workers 2 \
+--worker-machine-type n1-standard-2 \
+--worker-boot-disk-size 50 \
+--image-version 2.2-debian12 \
+--optional-components=JUPYTER \
+--project practice-final-007
+
+
+Update the existing cluster, if while creating cluster not enabled JUPYTER component.
+This will not work because at time of cluster creation only Jupyterlab web interface options get enabled
+
+gcloud dataproc clusters update cluster-95c1 \
+--region=us-central1 \
+--optional-components=JUPYTER \
+--enable-component-gateway
+
+
+Delete the dataproc cluster-
+gcloud dataproc clusters delete your-cluster-name --region=your-region
+
+gcloud dataproc clusters delete cluster-95c1 --region=us-central1
